@@ -1,0 +1,50 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/images/bg-normal.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.7);
+    z-index: -1;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 10rem;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .date {
+        font-size: 2rem;
+    }
+
+    .time {
+        font-size: 5rem;
+    }
+
+    .alarm-toggle {
+        width: 50px;
+        height: 50px;
+    }
+}
