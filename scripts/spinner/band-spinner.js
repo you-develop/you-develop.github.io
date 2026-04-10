@@ -68,10 +68,10 @@ export class BandSpinner {
         this.abortController?.abort();
         this.abortController = new AbortController();
         const signal = this.abortController.signal;
-        document.addEventListener('mousedown', e => this._onDragStart(e.clientX), { signal });
+        document.addEventListener('mousedown', e => { if (!e.target.closest('#featurePanel')) this._onDragStart(e.clientX); }, { signal });
         document.addEventListener('mousemove', e => this._onDragMove(e.clientX), { signal });
         document.addEventListener('mouseup', () => this._onDragEnd(), { signal });
-        document.addEventListener('touchstart', e => this._onDragStart(e.touches[0].clientX), { passive: true, signal });
+        document.addEventListener('touchstart', e => { if (!e.target.closest('#featurePanel')) this._onDragStart(e.touches[0].clientX); }, { passive: true, signal });
         document.addEventListener('touchmove', e => { if (this.isDragging) this._onDragMove(e.touches[0].clientX); }, { passive: true, signal });
         document.addEventListener('touchend', () => this._onDragEnd(), { signal });
     }

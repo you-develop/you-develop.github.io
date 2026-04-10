@@ -12,7 +12,28 @@ export class SpinnerController {
         this.isSelecting = false;
         this.onIconSelectedCallback = null;
         this.selectTimer = null;
+        this._fadeRAF = null;
     }
+
+    setFade(value) {
+        if (this._fadeRAF) { cancelAnimationFrame(this._fadeRAF); this._fadeRAF = null; }
+        this.orbitSpinner.fadeFactor = value;
+    }
+
+    animateFade(target, duration) {
+        if (this._fadeRAF) { cancelAnimationFrame(this._fadeRAF); this._fadeRAF = null; }
+        const from = this.orbitSpinner.fadeFactor;
+        const startTime = performance.now();
+        const step = () => {
+            const t = Math.min((performance.now() - startTime) / duration, 1);
+            this.orbitSpinner.fadeFactor = from + (target - from) * t;
+            if (t < 1) this._fadeRAF = requestAnimationFrame(step);
+            else this._fadeRAF = null;
+        };
+        this._fadeRAF = requestAnimationFrame(step);
+    }
+
+    get fadeFactor() { return this.orbitSpinner.fadeFactor; }
 
     async initialize(icons, onIconSelected) {
         this.icons = icons;

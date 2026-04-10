@@ -1,0 +1,141 @@
+/* 할 일 목록 패널 콘텐츠 */
+.todo-body {
+    display: flex;
+    flex-direction: column;
+    min-width: 380px;
+    margin-top: 20px;
+}
+
+/* 카운터 */
+.todo-counter {
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 14px;
+    letter-spacing: 0.08em;
+}
+
+/* 목록 스크롤 영역 */
+.todo-list {
+    max-height: 280px;
+    overflow-y: auto;
+    margin-bottom: 14px;
+    padding-right: 4px;
+}
+
+.todo-list::-webkit-scrollbar { width: 5px; }
+.todo-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 3px; }
+.todo-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+/* 항목 행 */
+.todo-item {
+    display: grid;
+    grid-template-columns: 26px 1fr 28px 28px;
+    align-items: center;
+    padding: 10px 10px;
+    margin-bottom: 6px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+
+.todo-item:hover { background: rgba(255,255,255,0.11); }
+
+/* 체크박스 */
+.todo-checkbox {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    accent-color: #4dd0e1;
+    flex-shrink: 0;
+}
+
+/* 텍스트 */
+.todo-text {
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.93rem;
+    transition: color 0.2s;
+}
+
+.todo-item.done .todo-text {
+    text-decoration: line-through;
+    color: rgba(255,255,255,0.4);
+}
+
+/* 편집 입력 */
+.todo-text-edit {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 5px;
+    color: white;
+    font-size: 0.93rem;
+    padding: 3px 7px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.todo-text-edit:focus {
+    outline: none;
+    border-color: #4dd0e1;
+    box-shadow: 0 0 0 2px rgba(77,208,225,0.25);
+}
+
+/* 아이콘 버튼 */
+.todo-btn {
+    width: 26px;
+    height: 26px;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+}
+
+.todo-btn svg { width: 14px; height: 14px; }
+.todo-btn:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); }
+.todo-delete:hover { color: #ff6b6b; }
+.todo-edit:hover { color: #4dd0e1; }
+
+/* 추가 행 */
+.todo-add-row {
+    display: grid;
+    grid-template-columns: 1fr 56px;
+    gap: 8px;
+}
+
+.todo-add-input {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 7px;
+    color: white;
+    font-size: 0.9rem;
+    padding: 9px 12px;
+}
+
+.todo-add-input::placeholder { color: rgba(255,255,255,0.35); }
+.todo-add-input:focus { outline: none; border-color: #4dd0e1; }
+
+.todo-add-btn {
+    background: rgba(77,208,225,0.25);
+    border: 1px solid rgba(77,208,225,0.5);
+    border-radius: 7px;
+    color: #4dd0e1;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+}
+
+.todo-add-btn:hover { background: rgba(77,208,225,0.4); transform: translateY(-1px); }

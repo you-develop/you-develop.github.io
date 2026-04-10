@@ -1,2 +1,2 @@
-// 할 일 목록 모듈 (구현 예정)
-export function init() {}
+// 할 일 목록 모듈 (todo/ 폴더로 위임)
+export { mount, unmount } from './todo/index.js';

@@ -2,10 +2,12 @@
 import { init as initClock } from './clock.js';
 import { init as initDragBlur } from './dragBlur.js';
 import { init as initSpinner } from './spinner/index.js';
-import { show as showPanel, hide as hidePanel, isVisible as isPanelVisible } from './featurePanel.js';
+import { show as showPanel, hide as hidePanel, isVisible as isPanelVisible, registerModule } from './featurePanel.js';
 import { toMain, toWait, getState } from './screenTransition.js';
+import { mount as todoMount, unmount as todoUnmount } from './todo/index.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    registerModule('todo', { mount: todoMount, unmount: todoUnmount });
     initClock();
     initDragBlur(toMain);
     await initSpinner(showPanel);

@@ -6,7 +6,8 @@ export class OrbitSpinner {
     constructor(mainElement) {
         this.mainElement = mainElement;
         this.iconElements = [];
-        this.angle = 0;
+        this.angle = 90;
+        this.fadeFactor = 1; // 화면 전환용 페이드 배율 (0~1)
         this.isDragging = false;
         this.dragStartX = 0;
         this.angleAtDragStart = 0;
@@ -55,7 +56,7 @@ export class OrbitSpinner {
             const normalized = (y / ORBIT_RADIUS_Y + 1) / 2;
             element.style.transform = `translate(${x}px, ${y}px) scale(${0.65 + 0.35 * normalized})`;
             element.style.zIndex = Math.round(y + ORBIT_RADIUS_Y);
-            element.style.opacity = String(0.5 + 0.5 * normalized);
+            element.style.opacity = String((0.5 + 0.5 * normalized) * this.fadeFactor);
         });
     }
 

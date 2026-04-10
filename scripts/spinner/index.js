@@ -14,3 +14,8 @@ export async function init(onIconSelected) {
 export function reset() {
     controller?.reset();
 }
+
+// 화면 전환용 아이콘 페이드 제어
+export function setIconFade(value) { controller?.setFade(value); }
+export function animateIconFade(target, duration) { controller?.animateFade(target, duration); }
+export function getIconFade() { return controller?.fadeFactor ?? 1; }
