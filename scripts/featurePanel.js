@@ -5,16 +5,36 @@ const panel = document.getElementById('featurePanel');
 const titleEl = document.getElementById('panelTitle');
 const modules = {};
 let currentId = null;
+let hideTimer = null;
+const TRANSITION_MS = 350;
 
 export function registerModule(id, { mount, unmount }) {
     modules[id] = { mount, unmount };
 }
 
 export function show(icon) {
-    modules[currentId]?.unmount?.();
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+
+    // 이미 열려 있으면 페이드 아웃 후 새 콘텐츠로 교체
+    if (currentId) {
+        panel.classList.remove('panel-open');
+        const prevId = currentId;
+        currentId = null;
+        hideTimer = setTimeout(() => {
+            hideTimer = null;
+            modules[prevId]?.unmount?.();
+            _mount(icon);
+        }, TRANSITION_MS);
+        return;
+    }
+
+    _mount(icon);
+}
+
+function _mount(icon) {
     currentId = icon.id;
     titleEl.innerHTML = `<span>${icon.label}</span>`;
-    panel.classList.remove('hidden');
+    panel.classList.add('panel-open');
     modules[icon.id]?.mount?.(panel);
 }
 
@@ -23,10 +43,15 @@ export function getTitleEl() { return titleEl; }
 export function hide() {
     modules[currentId]?.unmount?.();
     currentId = null;
-    panel.classList.add('hidden');
+    panel.classList.remove('panel-open');
     resetSpinner();
+    // 트랜지션 종료 후 내용 비움
+    hideTimer = setTimeout(() => {
+        titleEl.innerHTML = '';
+        hideTimer = null;
+    }, 400);
 }
 
 export function isVisible() {
-    return !panel.classList.contains('hidden');
+    return panel.classList.contains('panel-open');
 }

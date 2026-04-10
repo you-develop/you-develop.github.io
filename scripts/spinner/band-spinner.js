@@ -10,6 +10,7 @@ export class BandSpinner {
         this.bandOffset = 0;
         this.isDragging = false;
         this.lastDragX = 0;
+        this.hasDragMoved = false;
         this.abortController = null;
         this.snapTimer = null;
     }
@@ -74,12 +75,23 @@ export class BandSpinner {
         document.addEventListener('touchstart', e => { if (!e.target.closest('#featurePanel')) this._onDragStart(e.touches[0].clientX); }, { passive: true, signal });
         document.addEventListener('touchmove', e => { if (this.isDragging) this._onDragMove(e.touches[0].clientX); }, { passive: true, signal });
         document.addEventListener('touchend', () => this._onDragEnd(), { signal });
+        this.iconElements.forEach((el, index) => {
+            el.addEventListener('click', () => this._onClick(index), { signal });
+        });
     }
 
-    _onDragStart(x) { this.isDragging = true; this.lastDragX = x; }
+    _onClick(index) {
+        if (this.hasDragMoved || this.snapTimer) return;
+        if (index === this.selectedIndex) return;
+        this.selectedIndex = index;
+        this._applySnap(() => this.onSelectCallback?.(this.selectedIndex));
+    }
+
+    _onDragStart(x) { this.isDragging = true; this.lastDragX = x; this.hasDragMoved = false; }
 
     _onDragMove(x) {
         if (!this.isDragging) return;
+        this.hasDragMoved = true;
         this.bandOffset -= (x - this.lastDragX);
         this.lastDragX = x;
         while (this.bandOffset >= BAND_ICON_SPACING / 2) { this.bandOffset -= BAND_ICON_SPACING; this.selectedIndex = (this.selectedIndex + 1) % this.iconCount; }
@@ -90,6 +102,8 @@ export class BandSpinner {
     _onDragEnd() {
         if (!this.isDragging) return;
         this.isDragging = false;
+        // 실제 드래그가 없으면 click 이벤트에 위임
+        if (!this.hasDragMoved) return;
         this._applySnap(() => this.onSelectCallback?.(this.selectedIndex));
     }
 }
