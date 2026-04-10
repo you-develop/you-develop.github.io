@@ -19,19 +19,8 @@ body, html {
     z-index: -1;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 10rem;
-    align-items: center;
-    height: 100vh;
-    color: white;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-}
-
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 @media (max-width: 768px) {

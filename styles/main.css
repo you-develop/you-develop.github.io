@@ -1,4 +1,4 @@
 @import url('base.css');
-@import url('clock.css');
-@import url('alarm.css');
-@import url('thread.css');
+@import url('screen.css');
+@import url('spinner.css');
+@import url('featurePanel.css');

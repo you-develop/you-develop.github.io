@@ -11,69 +11,32 @@
 <body>
     <div class="background" id="background"></div>
 
-    <div class="container">
+    <!-- 대기 화면 -->
+    <div id="waitScreen" class="wait-screen">
         <div class="date" id="date"></div>
         <div class="time" id="time"></div>
-        <div id="alarmMessage" class="alarm-message hidden">
-            <div class="progress-bar-container">
-                <div id="alarmProgressBar" class="progress-bar"></div>
+    </div>
+
+    <!-- 메인 화면 -->
+    <div id="mainScreen" class="main-screen hidden">
+        <div class="top-clock">
+            <span id="mainDate"></span>
+            <span id="mainTime"></span>
+        </div>
+        <div id="spinnerContainer" class="spinner-container">
+            <div class="spinner-wrapper">
+                <div class="spinner" id="spinner"></div>
             </div>
-            <h3>휴식 시간!</h3>
-            <ul>
-                <li>물 마시기</li>
-                <li>눈 쉬어주기</li>
-                <li>간단한 운동과 스트레칭하기</li>
-            </ul>
         </div>
     </div>
 
-    <!-- 알람 토글 버튼 (오른쪽 상단에 배치) -->
-    <div class="alarm-toggle" id="alarmToggle">
-        <!-- 알람 OFF 아이콘 -->
-        <svg id="bellOff" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-            <path d="M18.63 13A17.89 17.89 0 0 1 18 8"></path>
-            <path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"></path>
-            <path d="M18 8a6 6 0 0 0-9.33-5"></path>
-            <line x1="1" y1="1" x2="23" y2="23"></line>
-        </svg>
-        <!-- 알람 ON 아이콘 -->
-        <svg id="bellOn" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-        </svg>
+    <!-- 기능 패널 -->
+    <div id="featurePanel" class="feature-panel hidden">
+        <div id="panelTitle" class="panel-title"></div>
     </div>
 
-    <!-- 방명록 토글 버튼 -->
-    <div class="guestbook-toggle" id="guestbookToggle">
-        <!-- 방명록 OFF 아이콘 -->
-        <svg id="guestbookOff" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 3h18v18H3z"></path>
-            <path d="M8 8h8v8H8z"></path>
-        </svg>
-        <!-- 방명록 ON 아이콘 -->
-        <svg id="guestbookOn" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
-            <path d="M3 3h18v18H3z"></path>
-            <path d="M8 8h8v8H8z"></path>
-            <path d="M12 12h0"></path>
-        </svg>
-    </div>
-
-    <div id="guestbook" class="guestbook">
-        <h2>방명록</h2>
-        <textarea placeholder="메시지를 입력하세요..." rows="10"></textarea>
-        <button>저장</button>
-    </div>
-
-    <!-- 알람 소리 -->
-    <audio id="alarmSound" class="hidden">
-        <source src="assets/sounds/alarm.mp3" type="audio/mpeg">
-        <source src="assets/sounds/alarm2.mp3" type="audio/mpeg">
-    </audio>
+    <!-- 유리 오버레이 (드래그 blur 효과) -->
+    <div id="glassOverlay" class="glass-overlay"></div>
 
     <script type="module" src="scripts/main.js"></script>
 </body>

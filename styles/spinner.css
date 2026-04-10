@@ -1,0 +1,63 @@
+/* 스피너 래퍼 */
+.spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    /* transition: transform 0.7s linear; */
+}
+
+/* 궤도 중심점 */
+.spinner {
+    position: relative;
+    width: 0;
+    height: 0;
+}
+
+/* 선택 시 스피너 아래로 이동 */
+.spinner-container.selecting .spinner-wrapper {
+    transform: translateY(40vh);
+}
+
+/* 아이콘 아이템 */
+.icon-item {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    margin: -35px 0 0 -35px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.icon-item:hover {
+    background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 24px rgba(255, 255, 255, 0.2);
+}
+
+.icon-item svg {
+    width: 32px;
+    height: 32px;
+    stroke: white;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.icon-item.selected {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+}
