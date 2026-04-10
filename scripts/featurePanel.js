@@ -13,10 +13,12 @@ export function registerModule(id, { mount, unmount }) {
 export function show(icon) {
     modules[currentId]?.unmount?.();
     currentId = icon.id;
-    titleEl.textContent = icon.label;
+    titleEl.innerHTML = `<span>${icon.label}</span>`;
     panel.classList.remove('hidden');
     modules[icon.id]?.mount?.(panel);
 }
+
+export function getTitleEl() { return titleEl; }
 
 export function hide() {
     modules[currentId]?.unmount?.();

@@ -1,2 +1,2 @@
-// 메모/계획 모듈 (구현 예정)
-export function init() {}
+// 메모 모듈 공개 API
+export { mount, unmount } from './memo/index.js';

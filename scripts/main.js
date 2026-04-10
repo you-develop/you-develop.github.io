@@ -5,9 +5,11 @@ import { init as initSpinner } from './spinner/index.js';
 import { show as showPanel, hide as hidePanel, isVisible as isPanelVisible, registerModule } from './featurePanel.js';
 import { toMain, toWait, getState } from './screenTransition.js';
 import { mount as todoMount, unmount as todoUnmount } from './todo/index.js';
+import { mount as memoMount, unmount as memoUnmount } from './memo/index.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     registerModule('todo', { mount: todoMount, unmount: todoUnmount });
+    registerModule('memo', { mount: memoMount, unmount: memoUnmount });
     initClock();
     initDragBlur(toMain);
     await initSpinner(showPanel);
