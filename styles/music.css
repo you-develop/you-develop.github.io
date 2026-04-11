@@ -1,0 +1,123 @@
+/* 플로팅 YouTube 플레이어 */
+.floating-player {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 280px;
+    height: 158px;
+    z-index: 50;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    background: #000;
+    transition: opacity 0.3s;
+}
+
+.floating-player.hidden { display: none; }
+
+.floating-player iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* 음악 패널 */
+.music-body {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 260px;
+}
+
+.music-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.music-url-input {
+    flex: 1;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.music-url-input:focus { border-color: rgba(255, 255, 255, 0.5); }
+
+.music-url-input.music-url-error { border-color: #ff6b6b; }
+
+.music-url-input::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+.music-add-btn {
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.music-add-btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+.music-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.music-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.music-item:hover { background: rgba(255, 255, 255, 0.14); }
+
+.music-item-title {
+    flex: 1;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.music-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+}
+
+.music-delete:hover { opacity: 1; }
+
+.music-delete svg { width: 15px; height: 15px; }
+
+.music-counter {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
