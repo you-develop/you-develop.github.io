@@ -12,9 +12,15 @@ export function buildBody() {
             <button class="music-add-btn">추가</button>
         </div>
         <div class="music-list"></div>
-        <div class="music-counter">0곡</div>
     `;
     return body;
+}
+
+export function buildCounter() {
+    const span = document.createElement('span');
+    span.className = 'music-counter';
+    span.textContent = '0곡';
+    return span;
 }
 
 export function renderList(listEl, items) {
@@ -34,8 +40,8 @@ function buildItem(item) {
     return el;
 }
 
-export function updateCounter(bodyEl, count) {
-    bodyEl.querySelector('.music-counter').textContent = `${count}곡`;
+export function updateCounter(counterEl, count) {
+    if (counterEl) counterEl.textContent = `${count}곡`;
 }
 
 function escapeHtml(str) {

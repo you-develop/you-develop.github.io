@@ -2,8 +2,10 @@
 import * as store from './store.js';
 import * as render from './render.js';
 import { setPlaylist, appendVideo, removeVideo, playAt } from './player.js';
+import { getTitleEl } from '../featurePanel.js';
 
 let body = null;
+let counterEl = null;
 let abortCtrl = null;
 let iconsLoaded = false;
 
@@ -19,6 +21,8 @@ export async function mount(panelEl) {
     await loadIcons();
     body = render.buildBody();
     panelEl.appendChild(body);
+    counterEl = render.buildCounter();
+    getTitleEl().appendChild(counterEl);
     refresh();
 
     abortCtrl = new AbortController();
@@ -34,13 +38,15 @@ export function unmount() {
     if (!body) return;
     abortCtrl?.abort();
     body.remove();
+    counterEl?.remove();
     body = null;
+    counterEl = null;
 }
 
 function refresh() {
     const items = store.getItems();
     render.renderList(body.querySelector('.music-list'), items);
-    render.updateCounter(body, items.length);
+    render.updateCounter(counterEl, items.length);
 }
 
 async function onAdd() {

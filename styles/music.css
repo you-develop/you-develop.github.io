@@ -38,35 +38,36 @@
 
 .music-url-input {
     flex: 1;
-    padding: 8px 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
+    padding: 9px 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 7px;
     color: white;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.15s;
 }
 
-.music-url-input:focus { border-color: rgba(255, 255, 255, 0.5); }
+.music-url-input:focus { border-color: #4dd0e1; }
 
 .music-url-input.music-url-error { border-color: #ff6b6b; }
 
-.music-url-input::placeholder { color: rgba(255, 255, 255, 0.4); }
+.music-url-input::placeholder { color: rgba(255, 255, 255, 0.35); }
 
 .music-add-btn {
     padding: 8px 14px;
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
+    background: rgba(77, 208, 225, 0.25);
+    color: #4dd0e1;
+    border: 1px solid rgba(77, 208, 225, 0.5);
+    border-radius: 7px;
     cursor: pointer;
     font-size: 0.85rem;
-    transition: background 0.2s;
+    font-weight: 600;
+    transition: background 0.15s;
     white-space: nowrap;
 }
 
-.music-add-btn:hover { background: rgba(255, 255, 255, 0.25); }
+.music-add-btn:hover { background: rgba(77, 208, 225, 0.4); }
 
 .music-list {
     display: flex;
@@ -76,19 +77,23 @@
     overflow-y: auto;
 }
 
+.music-list::-webkit-scrollbar { width: 5px; }
+.music-list::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 3px; }
+.music-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
 .music-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 12px;
+    padding: 10px 10px;
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.15s;
 }
 
-.music-item:hover { background: rgba(255, 255, 255, 0.14); }
+.music-item:hover { background: rgba(255, 255, 255, 0.11); }
 
 .music-item-title {
     flex: 1;
@@ -100,24 +105,28 @@
 }
 
 .music-delete {
-    background: none;
+    width: 26px;
+    height: 26px;
+    background: transparent;
     border: none;
+    color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
-    padding: 2px;
-    opacity: 0.5;
+    border-radius: 5px;
     display: flex;
     align-items: center;
-    transition: opacity 0.2s;
+    justify-content: center;
+    padding: 3px;
+    transition: color 0.15s, background 0.15s;
     flex-shrink: 0;
 }
 
-.music-delete:hover { opacity: 1; }
+.music-delete svg { width: 14px; height: 14px; }
+.music-delete:hover { background: rgba(255, 255, 255, 0.1); color: #ff6b6b; }
 
-.music-delete svg { width: 15px; height: 15px; }
-
+/* 카운터 — 제목 행 오른쪽 끝 */
 .music-counter {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.5);
-    padding-top: 6px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.08em;
 }

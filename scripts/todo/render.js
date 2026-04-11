@@ -9,13 +9,19 @@ export function buildBody() {
     const div = document.createElement('div');
     div.className = 'todo-body';
     div.innerHTML = `
-        <div class="todo-counter">0 / 0</div>
-        <div class="todo-list"></div>
         <div class="todo-add-row">
             <input class="todo-add-input" placeholder="새 항목 추가..." maxlength="100">
             <button class="todo-add-btn">추가</button>
-        </div>`;
+        </div>
+        <div class="todo-list"></div>`;
     return div;
+}
+
+export function buildCounter() {
+    const span = document.createElement('span');
+    span.className = 'todo-counter';
+    span.textContent = '0 / 0';
+    return span;
 }
 
 export function buildItem(item) {
@@ -35,8 +41,8 @@ export function renderList(listEl, items) {
     items.forEach(item => listEl.appendChild(buildItem(item)));
 }
 
-export function updateCounter(bodyEl, done, total) {
-    bodyEl.querySelector('.todo-counter').textContent = `${done} / ${total}`;
+export function updateCounter(counterEl, done, total) {
+    if (counterEl) counterEl.textContent = `${done} / ${total}`;
 }
 
 export function enterEdit(itemEl, text) {

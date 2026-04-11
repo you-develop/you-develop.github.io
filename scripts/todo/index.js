@@ -2,8 +2,10 @@
 import * as store from './store.js';
 import * as render from './render.js';
 import { launch as launchConfetti } from './confetti.js';
+import { getTitleEl } from '../featurePanel.js';
 
 let body = null;
+let counterEl = null;
 let editingId = null;
 let abortCtrl = null;
 let iconsLoaded = false;
@@ -24,6 +26,8 @@ export async function mount(panelEl) {
     await loadIcons();
     body = render.buildBody();
     panelEl.appendChild(body);
+    counterEl = render.buildCounter();
+    getTitleEl().appendChild(counterEl);
     refresh();
 
     abortCtrl = new AbortController();
@@ -41,7 +45,9 @@ export function unmount() {
     if (editingId) cancelEdit();
     abortCtrl?.abort();
     body.remove();
+    counterEl?.remove();
     body = null;
+    counterEl = null;
     editingId = null;
 }
 
@@ -51,7 +57,7 @@ function refresh() {
     const items = store.getItems();
     render.renderList(body.querySelector('.todo-list'), items);
     const { done, total } = store.getStats();
-    render.updateCounter(body, done, total);
+    render.updateCounter(counterEl, done, total);
 }
 
 function onBodyClick(e) {

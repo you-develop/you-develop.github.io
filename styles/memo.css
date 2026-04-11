@@ -91,15 +91,15 @@
     color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     border-radius: 5px;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;
+    padding: 3px;
     transition: color 0.15s, background 0.15s;
     flex-shrink: 0;
 }
 
-.memo-action-btn svg { width: 15px; height: 15px; }
+.memo-action-btn svg { width: 14px; height: 14px; }
 .memo-action-btn:hover { background: rgba(255,255,255,0.1); color: #4dd0e1; }

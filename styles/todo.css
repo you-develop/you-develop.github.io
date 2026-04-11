@@ -3,15 +3,14 @@
     display: flex;
     flex-direction: column;
     min-width: 380px;
-    margin-top: 20px;
+    margin-top: 16px;
 }
 
-/* 카운터 */
+/* 카운터 — 제목 행 오른쪽 끝 */
 .todo-counter {
-    text-align: center;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 14px;
+    font-size: 0.85rem;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.55);
     letter-spacing: 0.08em;
 }
 
@@ -19,7 +18,7 @@
 .todo-list {
     max-height: 280px;
     overflow-y: auto;
-    margin-bottom: 14px;
+    margin-top: 14px;
     padding-right: 4px;
 }
 
