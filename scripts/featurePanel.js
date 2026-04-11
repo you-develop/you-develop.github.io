@@ -13,6 +13,7 @@ export function registerModule(id, { mount, unmount }) {
 }
 
 export function show(icon) {
+    if (currentId === icon.id) return;
     if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
 
     // 이미 열려 있으면 페이드 아웃 후 새 콘텐츠로 교체
@@ -34,22 +35,25 @@ export function show(icon) {
 function _mount(icon) {
     currentId = icon.id;
     titleEl.innerHTML = `<span>${icon.label}</span>`;
-    panel.classList.add('panel-open');
     modules[icon.id]?.mount?.(panel);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        panel.classList.add('panel-open');
+    }));
 }
 
 export function getTitleEl() { return titleEl; }
 
 export function hide() {
-    modules[currentId]?.unmount?.();
+    const prevId = currentId;
     currentId = null;
     panel.classList.remove('panel-open');
     resetSpinner();
     // 트랜지션 종료 후 내용 비움
     hideTimer = setTimeout(() => {
+        modules[prevId]?.unmount?.();
         titleEl.innerHTML = '';
         hideTimer = null;
-    }, 400);
+    }, TRANSITION_MS);
 }
 
 export function isVisible() {

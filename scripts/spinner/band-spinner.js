@@ -1,5 +1,6 @@
 // 밴드 모드: 수평 배열, 드래그 스냅 선택
 const BAND_ICON_SPACING = 90;
+const DRAG_THRESHOLD = 5;
 
 export class BandSpinner {
     constructor() {
@@ -84,14 +85,15 @@ export class BandSpinner {
         if (this.hasDragMoved || this.snapTimer) return;
         if (index === this.selectedIndex) return;
         this.selectedIndex = index;
-        this._applySnap(() => this.onSelectCallback?.(this.selectedIndex));
+        this._applySnap();
+        this.onSelectCallback?.(this.selectedIndex);
     }
 
-    _onDragStart(x) { this.isDragging = true; this.lastDragX = x; this.hasDragMoved = false; }
+    _onDragStart(x) { this.isDragging = true; this.lastDragX = x; this.dragStartX = x; this.hasDragMoved = false; }
 
     _onDragMove(x) {
         if (!this.isDragging) return;
-        this.hasDragMoved = true;
+        if (!this.hasDragMoved && Math.abs(x - this.dragStartX) >= DRAG_THRESHOLD) this.hasDragMoved = true;
         this.bandOffset -= (x - this.lastDragX);
         this.lastDragX = x;
         while (this.bandOffset >= BAND_ICON_SPACING / 2) { this.bandOffset -= BAND_ICON_SPACING; this.selectedIndex = (this.selectedIndex + 1) % this.iconCount; }
@@ -104,6 +106,7 @@ export class BandSpinner {
         this.isDragging = false;
         // 실제 드래그가 없으면 click 이벤트에 위임
         if (!this.hasDragMoved) return;
-        this._applySnap(() => this.onSelectCallback?.(this.selectedIndex));
+        this._applySnap();
+        this.onSelectCallback?.(this.selectedIndex);
     }
 }
