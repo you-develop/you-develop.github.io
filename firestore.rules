@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function admin() {
+      return signedIn() && request.auth.uid in [
+        'YOUR_GOOGLE_ADMIN_UID'
+      ];
+    }
+
+    function validThread(threadId) {
+      let data = request.resource.data;
+      return data.keys().hasOnly([
+        'content', 'authorId', 'createdAt', 'expiresAt', 'score', 'votes'
+      ])
+      && data.content is string
+      && data.content.size() >= 1
+      && data.content.size() <= 100
+      && data.authorId == request.auth.uid
+      && data.authorId == threadId
+      && data.createdAt == request.time
+      && data.expiresAt > request.time + duration.value(59, 'm')
+      && data.expiresAt <= request.time + duration.value(61, 'm')
+      && data.score == 0
+      && data.votes == {};
+    }
+
+    function validVote() {
+      let oldVote = resource.data.votes.get(request.auth.uid, 0);
+      let newVote = request.resource.data.votes.get(request.auth.uid, 0);
+      return resource.data.expiresAt > request.time
+      && request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(['score', 'votes'])
+      && request.resource.data.votes.diff(resource.data.votes).affectedKeys()
+        .hasOnly([request.auth.uid])
+      && newVote in [-1, 0, 1]
+      && request.resource.data.score == resource.data.score + newVote - oldVote;
+    }
+
+    match /threads/{threadId} {
+      allow read: if signedIn();
+      allow create: if signedIn() && validThread(threadId);
+      allow update: if signedIn() && (
+        validVote()
+        || (request.auth.uid == threadId
+          && resource.data.expiresAt <= request.time
+          && validThread(threadId))
+      );
+      allow delete: if signedIn() && (
+        admin()
+        || resource.data.expiresAt <= request.time
+        || resource.data.score <= -20
+      );
+    }
+  }
+}

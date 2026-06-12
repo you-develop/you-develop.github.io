@@ -8,6 +8,7 @@ import { mount as todoMount, unmount as todoUnmount } from './todo/index.js';
 import { mount as memoMount, unmount as memoUnmount } from './memo/index.js';
 import { mount as musicMount, unmount as musicUnmount } from './music/index.js';
 import { mount as calendarMount, unmount as calendarUnmount } from './calendar/index.js';
+import { mount as threadMount, unmount as threadUnmount } from './thread/index.js';
 import { init as initMusicPlayer, setPlaylist } from './music/player.js';
 import { getItems } from './music/store.js';
 
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     registerModule('memo', { mount: memoMount, unmount: memoUnmount });
     registerModule('music', { mount: musicMount, unmount: musicUnmount });
     registerModule('calendar', { mount: calendarMount, unmount: calendarUnmount });
+    registerModule('thread', { mount: threadMount, unmount: threadUnmount });
     initMusicPlayer();
     initClock();
     initDragBlur(goToMain);

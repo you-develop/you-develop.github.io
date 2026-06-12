@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록 관리자</title>
+    <link rel="icon" href="assets/icons/favicon.ico">
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <main class="admin-shell">
+        <header>
+            <div>
+                <h1>방명록 관리자</h1>
+                <p id="adminStatus">Google 계정으로 로그인하세요.</p>
+            </div>
+            <button id="loginBtn">Google 로그인</button>
+            <button id="logoutBtn" hidden>로그아웃</button>
+        </header>
+        <section id="adminPanel" hidden>
+            <div class="admin-actions">
+                <button id="deleteSelected">선택 삭제</button>
+                <button id="deleteExpired">만료 삭제</button>
+                <button id="deleteAll" class="danger">전체 삭제</button>
+            </div>
+            <div id="threadList" class="admin-list"></div>
+        </section>
+    </main>
+    <script type="module" src="scripts/admin/index.js"></script>
+</body>
+</html>
