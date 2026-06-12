@@ -1,0 +1,91 @@
+.pomodoro-body {
+    width: min(560px, calc(100vw - 100px));
+    margin-top: 18px;
+}
+
+.pomodoro-stages {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 6px;
+    margin: 0 50px 20px;
+}
+
+.pomodoro-stage {
+    height: 4px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.pomodoro-stage i {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: rgba(77, 208, 225, 0.75);
+    transition: width 0.2s linear;
+}
+
+.pomodoro-stage.current { box-shadow: 0 0 7px rgba(77, 208, 225, 0.55); }
+
+.pomodoro-player {
+    display: grid;
+    grid-template-columns: 90px 1fr 40px;
+    align-items: center;
+    min-height: 64px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.pomodoro-time {
+    text-align: left;
+    font-size: 1.65rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.pomodoro-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.pomodoro-button {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    color: rgba(255, 255, 255, 0.72);
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.pomodoro-button:hover { color: white; background: rgba(255, 255, 255, 0.1); }
+.pomodoro-button svg { width: 100%; fill: none; stroke: currentColor; stroke-width: 2; }
+.pomodoro-toggle { width: 44px; height: 44px; color: #4dd0e1; background: rgba(77, 208, 225, 0.16); }
+
+.pomodoro-label {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px 12px;
+    color: white;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+}
+
+.pomodoro-label:focus { outline: none; border-color: #4dd0e1; }
+.pomodoro-label:disabled { color: rgba(255, 255, 255, 0.55); }
+.pomodoro-error { min-height: 16px; margin: 5px 2px 0; color: #ff8a8a; font-size: 0.78rem; text-align: left; }
+
+@media (max-width: 600px) {
+    .pomodoro-body { width: calc(100vw - 48px); }
+    .pomodoro-stages { margin: 0 12px 16px; gap: 4px; }
+    .pomodoro-player { grid-template-columns: 74px 1fr 36px; padding: 8px; }
+    .pomodoro-time { font-size: 1.3rem; }
+}

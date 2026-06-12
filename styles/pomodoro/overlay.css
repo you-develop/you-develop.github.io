@@ -1,0 +1,27 @@
+.pomodoro-overlay {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 1000;
+    color: rgba(235, 235, 238, 0.88);
+    background: rgba(4, 5, 10, 0.72);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    cursor: pointer;
+}
+
+.pomodoro-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pomodoro-overlay-message {
+    margin: 24px;
+    font-size: clamp(1.3rem, 4vw, 2.4rem);
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.04em;
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.55);
+}
