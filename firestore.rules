@@ -7,7 +7,7 @@ service cloud.firestore {
 
     function admin() {
       return signedIn() && request.auth.uid in [
-        'YOUR_GOOGLE_ADMIN_UID'
+        'ajK8fhZQPmWIMRHxnAMXFmZEH6i2'
       ];
     }
 
